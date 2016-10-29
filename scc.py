@@ -30,12 +30,13 @@ def iterDFS(n):
       if not found_valid_branch:
         result.append(home)
         foundcache.setfound(home,2)
-        print timemeasure()
+        print "%d %d"%(timemeasure(),home)
         q.pop()
     else:
       if foundcache.getfound(home) != 2:
         result.append(home)
-        print timemeasure()
+        foundcache.setfound(home,2)
+        print "%d %d"%(timemeasure(),home)
       q.pop()
   return result 
     
@@ -69,11 +70,8 @@ def runDFS():
   for i in xrange(1,maxnodes+1):
     if not foundcache.found(i):
       ret.extend(iterDFS(i))
-  print tmeasure
   nodecache.fp.close()
   del(nodecache)
-  foundcache.fp.truncate()
-  foundcache.fp.close()
   del(foundcache)  
   initDFS("forward.txt",0)
   maxsizes=[]
