@@ -61,9 +61,9 @@ def initDFS(fname,reverse):
   nodecache = NodeCache(nodefp,os.stat(fname).st_size,reverse, 10000, 9000)
   foundcache = FoundCache()
 
-def runDFS():
+def runDFS(reversefile, forwardfile):
   global foundcache, nodecache
-  initDFS("reverse.txt",1)
+  initDFS(reversefile,1)
   nodecache.getMaxNodes()       
   maxnodes = nodecache.maxnum
   ret = []
@@ -73,7 +73,7 @@ def runDFS():
   nodecache.fp.close()
   del(nodecache)
   del(foundcache)  
-  initDFS("forward.txt",0)
+  initDFS(forwardfile,0)
   maxsizes=[]
   ret.reverse()
   for i in ret:
@@ -84,10 +84,11 @@ def runDFS():
       maxsizes.sort(reverse=True)
       maxsizes=maxsizes[:5]
   print ",".join([ str(x) for x in maxsizes ])
-  foundcache.fp.truncate()
 
 
 # initialize maxnodes
 # actual algorithm
-runDFS()
-
+largefilesort("SCC.txt",os.stat("SCC.txt").st_size,"reverse.txt",1)
+largefilesort("SCC.txt",os.stat("SCC.txt").st_size,"forward.txt",0)
+runDFS("reverse.txt", "forward.txt")
+subprocess.check_call(["rm","reverse.txt","forward.txt"])

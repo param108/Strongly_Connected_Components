@@ -1,6 +1,7 @@
 from multiprocessing import Pool
 import os
 import sys 
+import subprocess
 
 def mergesort(l,s,e,nidx):
   llen = e - s
@@ -116,7 +117,8 @@ def largefilesort(fname,length,ofname,idx):
   DIV_FACTOR=1000000
   print p.map(partsort,[(fname,x,DIV_FACTOR,str(x)+".part",idx) for x in xrange(0,length,DIV_FACTOR)])
   nfilemerge([open(str(x)+".part") for x in xrange(0,length,DIV_FACTOR)],ofname,idx)
-  print "Num Processes:%s"%(sys.argv[1])
+  for partname in [ str(x)+".part" for x in xrange(0,length,DIV_FACTOR)]:
+    subprocess.check_call(["rm",partname]) 
 
 #basic mergesort test
 #inpeven = [(1,2),(3,5),(1,4),(3,7),(4,8),(1,9),(2,6)]
