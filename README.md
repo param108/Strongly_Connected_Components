@@ -31,7 +31,9 @@ This dictionary eats a LOT of memory but allows me O(1) lookup time while lists 
 ## Inputs:
 SCC.txt is the input huge graph with about 870000 nodes numbered 1,2,3...
 The format is 
-A B
+
+*A B*
+
 where A and B are node numbers and this line means there is a directed edge from A to B
 
 ## Note on Kosaraju's Algorithm:
