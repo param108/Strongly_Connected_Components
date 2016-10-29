@@ -2,6 +2,10 @@
 Code to find Strongly Connected Components in a huge graph.
 
 Uses Kosaraju's Algorithm.
+## To run:
+In the git root directory just type
+
+___python scc.py__
 
 ## Constraints:
 So I have a vm which has about 1G memory and 1 core. 
