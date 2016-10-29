@@ -42,7 +42,7 @@ where A and B are node numbers and this line means there is a directed edge from
 1. Reverse the arcs of the graph
 2. run DFS over all nodes scoring each completed node in increasing order.
 3. make the arcs once again point in the correct direction
-4. run DFS over all nodes in the decreasing order of score calculated in [1]
+4. run DFS over all nodes in the decreasing order of score calculated in [2]
 5. Each run of DFS will uncover an SCC
 
 In this code we just calculate the lengths of the SCCs and list the top 5 in decreasing order of size.
