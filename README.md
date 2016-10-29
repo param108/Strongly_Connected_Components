@@ -38,6 +38,7 @@ where A and B are node numbers and this line means there is a directed edge from
 
 ## Note on Kosaraju's Algorithm:
 (DFS: Depth first search)
+
 1. Reverse the arcs of the graph
 2. run DFS over all nodes scoring each completed node in increasing order.
 3. make the arcs once again point in the correct direction
