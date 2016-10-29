@@ -63,7 +63,7 @@ def initDFS(fname,reverse):
 def runDFS():
   global foundcache, nodecache
   initDFS("reverse.txt",1)
-  nodecache.getmaxnodes()       
+  nodecache.getMaxNodes()       
   maxnodes = nodecache.maxnum
   ret = []
   for i in xrange(1,maxnodes+1):

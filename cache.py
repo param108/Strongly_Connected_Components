@@ -1,29 +1,44 @@
 
 class FoundCache:
-  def __init__():
+  def __init__(self):
     self.cache = {}
 
-  def setfound(n,v=1):
+  def setfound(self,n,v=1):
     self.cache[n]=v
   
-  def found(n):
+  def found(self,n):
     if self.cache.has_key(n):
       return True
-    else
+    else:
       return False
 
-  def getfound(n):
+  def getfound(self,n):
     return self.cache[n]
 
 class NodeCache:
-  def __init__(fp,size,reverse, cachesize, threshold):
+  def __init__(self,fp,size,reverse, cachesize, threshold):
     self.nidx = reverse
     self.size = size
     self.fp = fp
     self.cachesize = cachesize
     self.threshold = threshold
 
-  def getIdxAtOffset(offset):
+  def getMaxNodes(self):
+    check={}
+    numNodes = 0
+    self.fp.seek(0)
+    l = self.fp.readline()
+    while(len(l)):
+      if l != "\n":
+        data = [ int(x.strip()) for x in l.split(" ") if len(x.strip()) != 0 ]
+        if data[self.nidx] not in check:
+          check[data[self.nidx]] = 1
+          numNodes+=1
+    self.maxnum = numNodes
+          
+
+
+  def getIdxAtOffset(self,offset):
     self.fp.seek(offset)
     a = self.fp.readline()
     while len(a) == 0:
@@ -35,10 +50,10 @@ class NodeCache:
       # ignore the first line
       self.fp.readline()
 
-    data = [ int(x.strip()) for x in self.fp.readline().split(" ") if len(x.strip()) == 0 ]
+    data = [ int(x.strip()) for x in self.fp.readline().split(" ") if len(x.strip()) != 0 ]
     return data[self.nidx]
 
-  def find(idx,which=-1):
+  def find(self,idx,which=-1):
     if idx in self.findcache:
       self.degree = self.findcache[idx]["degree"]
       self.findage += 1
@@ -75,7 +90,7 @@ class NodeCache:
     self.degree = []
     self.empty = True
     while fidx <= idx:
-      data = [ int(x.strip()) for x in self.fp.readline().split(" ") if len(x.strip()) == 0 ]
+      data = [ int(x.strip()) for x in self.fp.readline().split(" ") if len(x.strip()) != 0 ]
       fidx = data[self.nidx]
       if fidx == idx:
         self.empty = False 
